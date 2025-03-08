@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Section</title>
+    <!-- Bootstrap 5 CSS (Local) -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .search-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .search-form input[type="submit"] {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-form input[type="submit"]:hover {
+            background: #2980b9;
+        }
+
+        .show-all-button {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .show-all-button:hover {
+            background: #219653;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        td {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+            display: inline-block;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Section</h1>
+
+        <!-- Individual Player Section -->
+        <div class="section">
+            <h2>Individual Player Booking</h2>
+            <form action="/view_tables/booking/individual" method="POST" class="search-form">
+                <label for="playerName">Search by Player Name:</label>
+                <input type="text" id="playerName" name="playerName" placeholder="Enter player name" required>
+                <input type="submit" value="Search">
+            </form>
+            <button class="show-all-button" onclick="window.location.href='/view_tables/booking/all_individuals'">
+                Show All Individuals (Highest to Lowest)
+            </button>
+
+            <% if (individualResults) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Squad/Team Name</th>
+                            <th>Yellow Cards</th>
+                            <th>Red Cards</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% individualResults.forEach(player => { %>
+                            <tr>
+                                <td><%= player.player_name %></td>
+                                <td><%= player.squad_name %></td>
+                                <td><%= player.yellow_cards %></td>
+                                <td><%= player.red_cards %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+
+        <!-- Team/Squad Section -->
+        <div class="section">
+            <h2>Team/Squad Booking</h2>
+            <form action="/view_tables/booking/team" method="POST" class="search-form">
+                <label for="squadName">Search by Team/Squad Name:</label>
+                <input type="text" id="squadName" name="squadName" placeholder="Enter team/squad name" required>
+                <input type="submit" value="Search">
+            </form>
+            <button class="show-all-button" onclick="window.location.href='/view_tables/booking/all_teams'">
+                Show All Teams (Highest to Lowest)
+            </button>
+
+            <% if (teamResults) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Team/Squad Name</th>
+                            <th>Total Yellow Cards</th>
+                            <th>Total Red Cards</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% teamResults.forEach(team => { %>
+                            <tr>
+                                <td><%= team.squad_name %></td>
+                                <td><%= team.total_yellow_cards %></td>
+                                <td><%= team.total_red_cards %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+
+        <br>
+        <a href="/view_tables" class="btn-secondary">Back to Table List</a>
+        <div class="footer">
+            <p>Developed with ❤️ by <a href="#" target="_blank">Your Name</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS (Local) -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

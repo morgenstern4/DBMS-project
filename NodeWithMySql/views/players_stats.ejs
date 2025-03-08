@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Players Stat List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Players Stat List</h1>
+        <% if(players_stats.length > 0) { %>
+            <table class="players-stats-table" border="1">
+                <tr>
+                    <th>Player Stats ID</th>
+                    <th>Player ID</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Non-Penalty Goals</th>
+                    <th>PK Goals</th>
+                    <th>PK Attempts</th>
+                    <th>Yellow Cards</th>
+                    <th>Red Cards</th>
+                    <th>Actions</th>
+                </tr>
+                <% players_stats.forEach(function(player) { %>
+                    <tr>
+                        <td data-label="Player Stats ID"><%= player.player_stats_id %></td>
+                        <td data-label="Player ID"><%= player.player_id %></td>
+                        <td data-label="Goals"><%= player.goals %></td>
+                        <td data-label="Assists"><%= player.assists %></td>
+                        <td data-label="Non-Penalty Goals"><%= player.non_penalty_goals %></td>
+                        <td data-label="PK Goals"><%= player.pk_goals %></td>
+                        <td data-label="PK Attempts"><%= player.pk_attempts %></td>
+                        <td data-label="Yellow Cards"><%= player.yellow_cards %></td>
+                        <td data-label="Red Cards"><%= player.red_cards %></td>
+                        <td>
+                            <a href="/tables/delete-player-stat-info?player_stats_id=<%= player.player_stats_id %>"
+                               onclick="return confirm('Are you sure you want to delete this player stat?')">
+                               Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table>
+        <% } else { %>
+            <h2>No players stats found.</h2>
+        <% } %>
+    </div>
+</body>
+</html>

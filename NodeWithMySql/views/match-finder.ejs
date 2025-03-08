@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Finder</title>
+    <!-- Bootstrap 5 CSS (Local) -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/table.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+            border: none;
+            color: #fff;
+        }
+
+        /* Style for dropdown options */
+        .form-control option {
+            background: #333; /* Dark background for options */
+            color: #fff; /* White text for options */
+        }
+
+        .btn-primary {
+            background: #28a745;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Matches</h1>
+        <form action="/view_tables/find-matches" method="GET">
+            <div class="mb-3">
+                <label for="squad1" class="form-label">Select Squad 1:</label>
+                <select id="squad1" name="squad1" class="form-control" required>
+                    <% squads.forEach(squad => { %>
+                        <option value="<%= squad.squad_id %>"><%= squad.squad_name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="squad2" class="form-label">Select Squad 2:</label>
+                <select id="squad2" name="squad2" class="form-control" required>
+                    <% squads.forEach(squad => { %>
+                        <option value="<%= squad.squad_id %>"><%= squad.squad_name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Find Matches</button>
+            </div>
+        </form>
+        <div class="footer">
+            <p>Developed with ❤️ by <a href="#" target="_blank">Your Name</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS (Local) -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

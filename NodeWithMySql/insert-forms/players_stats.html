@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Insert Data into Player Stats Table</title>
+</head>
+<body>
+    <h1>Insert Data into Player Stats Table</h1>
+    <form action="/insert_data_into_tables/players_stats" method="POST">
+        <label for="player_stats_id">Player Stats ID:</label>
+        <input type="number" id="player_stats_id" name="player_stats_id" required><br><br>
+
+        <label for="player_id">Player ID:</label>
+        <input type="number" id="player_id" name="player_id" required><br><br>
+
+        <label for="goals">Goals:</label>
+        <input type="number" id="goals" name="goals" required><br><br>
+
+        <label for="assists">Assists:</label>
+        <input type="number" id="assists" name="assists" required><br><br>
+
+        <label for="non_penalty_goals">Non-Penalty Goals:</label>
+        <input type="number" id="non_penalty_goals" name="non_penalty_goals" required><br><br>
+
+        <label for="pk_goals">PK Goals:</label>
+        <input type="number" id="pk_goals" name="pk_goals" required><br><br>
+
+        <label for="pk_attempts">PK Attempts:</label>
+        <input type="number" id="pk_attempts" name="pk_attempts" required><br><br>
+
+        <label for="yellow_cards">Yellow Cards:</label>
+        <input type="number" id="yellow_cards" name="yellow_cards" required><br><br>
+
+        <label for="red_cards">Red Cards:</label>
+        <input type="number" id="red_cards" name="red_cards" required><br><br>
+
+        <button type="submit">Insert</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Match List</title>
+    <link rel="stylesheet" href="/css/table.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Matches</h1>
+        <form id="searchForm" onsubmit="return searching()">
+            <label for="match_id">Match ID:</label>
+            <input type="search" name="match_id" id="match_id">
+            <label for="match_date">Match Date:</label>
+            <input type="search" name="match_date" id="match_date">
+            <label for="squad_1_id">Squad 1 ID:</label>
+            <input type="search" name="squad_1_id" id="squad_1_id">
+            <label for="squad_2_id">Squad 2 ID:</label>
+            <input type="search" name="squad_2_id" id="squad_2_id">
+            <label for="score_squad_1">Score Squad 1:</label>
+            <input type="search" name="score_squad_1" id="score_squad_1">
+            <label for="score_squad_2">Score Squad 2:</label>
+            <input type="search" name="score_squad_2" id="score_squad_2">
+            <label for="stadium_id">Stadium ID:</label>
+            <input type="search" name="stadium_id" id="stadium_id">
+            <input type="submit" value="Search">
+        </form>
+
+        <h1>Match List</h1>
+        <% if(matches.length > 0) { %>
+            <table border="1" length="50%" width="50%">
+                <tr> 
+                    <th>Match Id</th>
+                    <th>Match Date</th>
+                    <th>Squad 1 Id</th>
+                    <th>Squad 2 Id</th>
+                    <th>Score Squad 1</th>
+                    <th>Score Squad 2</th>
+                    <th>Stadium Id</th>
+                    <th>Actions</th>
+                </tr>
+                <% matches.forEach(function(match) { %>
+                    <tr>
+                        <td><%= match.match_id %></td>
+                        <td><%= match.match_date %></td>
+                        <td><%= match.squad_1_id %></td>
+                        <td><%= match.squad_2_id %></td>
+                        <td><%= match.score_squad_1 %></td>
+                        <td><%= match.score_squad_2 %></td>
+                        <td><%= match.stadium_id %></td>
+                        <td>
+                            <a href="/tables/delete-match-info?match_id=<%= match.match_id %>"
+                               onclick="return confirm('Are you sure you want to delete this match?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table>
+        <% } else { %>
+            <h2>No Matches found.</h2>
+        <% } %>
+    </div>
+
+    <script>
+        function searching() {
+            const match_id = document.getElementById("match_id").value;
+            const match_date = document.getElementById("match_date").value;
+            const squad_1_id = document.getElementById("squad_1_id").value;
+            const squad_2_id = document.getElementById("squad_2_id").value;
+            const score_squad_1 = document.getElementById("score_squad_1").value;
+            const score_squad_2 = document.getElementById("score_squad_2").value;
+            const stadium_id = document.getElementById("stadium_id").value;
+
+            const req = new XMLHttpRequest();
+            req.open('GET', `/tables/search-match?match_id=${encodeURIComponent(match_id)}&match_date=${encodeURIComponent(match_date)}&squad_1_id=${encodeURIComponent(squad_1_id)}&squad_2_id=${encodeURIComponent(squad_2_id)}&score_squad_1=${encodeURIComponent(score_squad_1)}&score_squad_2=${encodeURIComponent(score_squad_2)}&stadium_id=${encodeURIComponent(stadium_id)}`, true);
+            req.send();
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    const matches = JSON.parse(req.responseText); // Parse the JSON response
+                    updateTable(matches);
+                }
+            };
+            return false; // Prevent form submission
+        }
+
+        function updateTable(matches) {
+            const tbody = document.querySelector("table tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            if (matches.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8">No matches found.</td></tr>`;
+                return;
+            }
+
+            matches.forEach(match => {
+                const row = `
+                    <tr>
+                        <td>${match.match_id}</td>
+                        <td>${match.match_date}</td>
+                        <td>${match.squad_1_id}</td>
+                        <td>${match.squad_2_id}</td>
+                        <td>${match.score_squad_1}</td>
+                        <td>${match.score_squad_2}</td>
+                        <td>${match.stadium_id}</td>
+                        <td>
+                            <a href="/tables/delete-match-info?match_id=${match.match_id}"
+                               onclick="return confirm('Are you sure you want to delete this match?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+    </script>
+</body>
+</html>

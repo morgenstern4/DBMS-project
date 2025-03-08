@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Insert Data into Stadiums Table</title>
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <h1>Insert Data into Stadiums Table</h1>
+    <form action="/insert_data_into_tables/stadiums" method="POST">
+        <label for="stadium_id">Stadium ID:</label>
+        <input type="number" id="stadium_id" name="stadium_id" required><br><br>
+
+        <label for="stadium_name">Stadium Name:</label>
+        <select id="stadium_name" name="stadium_name" required>
+            <option value="Lusail Stadium">Lusail Stadium</option>
+            <option value="Al Bayt Stadium">Al Bayt Stadium</option>
+            <option value="Khalifa International Stadium">Khalifa International Stadium</option>
+            <option value="Ahmad Bin Ali Stadium">Ahmad Bin Ali Stadium</option>
+            <option value="Education City Stadium">Education City Stadium</option>
+            <option value="Al Thumama Stadium">Al Thumama Stadium</option>
+            <option value="Al Janoub Stadium">Al Janoub Stadium</option>
+            <option value="Stadium 974">Stadium 974</option>
+        </select><br><br>
+
+        <label for="capacity">Capacity:</label>
+        <input type="number" id="capacity" name="capacity" required><br><br>
+
+        <label for="total_match_played">Total Matches Played:</label>
+        <input type="number" id="total_match_played" name="total_match_played" required><br><br>
+
+        <button type="submit">Insert</button>
+    </form>
+</body>
+</html>

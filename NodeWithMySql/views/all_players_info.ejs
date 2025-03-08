@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>All Players Info</title>
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>All Player Info List</h1>
+        <% if(all_players_info.length > 0) { %>
+            <table class="all-player-info-table" , border="1">
+                <tr> 
+                     <th>Player id</th>
+                     <th>Player name</th>
+                     <th>Position Id</th>
+                     <th>Position 2 ID</th>
+                     <th>Squad Id</th>
+                     <th>Age</th>
+                     <th>Club Id</th>
+                     <th>Birth Year</th>
+                     <th>Matches Played</th>
+                     <th>Starts</th>
+                     <th>Minutes Played</th>
+                     <th>Actions</th>
+                 </tr>
+                <% all_players_info.forEach(function(player) { %>
+                    <tr>
+                        <td data-label="Player id"><%= player.player_id %></td>
+                        <td data-label="Player name"><%= player.player_name %></td>
+                        <td data-label="Position Id"><%= player.position_id %></td>
+                        <td data-label="Position 2 Id"><%= player.position_2_id %></td>
+                        <td data-label="Squad Id"><%= player.squad_id %></td>
+                        <td data-label="Age"><%= player.age %></td>
+                        <td data-label="Club Id"><%= player.club_id %></td>
+                        <td data-label="Birth Year"><%= player.birth_year %></td>
+                        <td data-label="Matches Played"><%= player.matches_played %></td>
+                        <td data-label="Starts"><%= player.starts %></td>
+                        <td data-label="Minutes Played"><%= player.minutes_played %></td>
+                        <td>
+                            <a href="/tables/delete-all-player-info?player_id=<%= player.player_id %>"
+                               onclick="return confirm('Are you sure you want to delete this player?')">
+                                Delete
+                            </a>
+                        </td>
+                         </td>
+                        
+                    </tr>
+                <% }); %>
+            </table>
+        <% } else { %>
+            <h2>No players found.</h2>
+        <% } %>
+    </div>
+</body>
+</html>

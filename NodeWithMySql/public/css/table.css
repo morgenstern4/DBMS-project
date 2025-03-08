@@ -1,0 +1,205 @@
+/* Modern and Minimalistic Table Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2em;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#searchForm {
+    width: 90%;
+    max-width: 400px;
+    padding: 1.5em;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+#searchForm label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    color: #2c3e50;
+}
+
+#searchForm input[type="search"],
+#searchForm input[type="submit"] {
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+#searchForm input[type="search"] {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#searchForm input[type="search"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+#searchForm input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+#searchForm input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Table Styling */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+th, td {
+    text-align: left;
+    padding: 1.2em;
+    transition: all 0.3s ease;
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+td:hover {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+    transform: scale(1.02);
+}
+
+/* Link Styling */
+table a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+table a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+table a:visited {
+    color: #8e44ad;
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    td:nth-child(4),
+    th:nth-child(4) {
+        display: none;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 1em;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 0.8em;
+    }
+}

@@ -1,0 +1,16 @@
+<h1>Insert data into positions table</h1>
+<form action="/insert_data_into_tables/positions" method="POST">
+  <label for="position_id">Position ID:</label>
+  <input type="number" id="position_id" name="position_id" required><br><br>
+
+  <label for="position_name">Position Name:</label>
+  <select id="position_name" name="position_name" required>
+    <option value="MF">MF</option>
+    <option value="DF">DF</option>
+    <option value="FW">FW</option>
+    <option value="GK">GK</option>
+    <option value="NO DATA">NO DATA</option>
+  </select><br><br>
+
+  <button type="submit">Insert</button>
+</form>

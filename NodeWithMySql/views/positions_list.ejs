@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Position List</title>
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Positions</h1>
+        <form id="searchForm" onsubmit="return searching()">
+            <label for="position_id">Position ID:</label>
+            <input type="search" name="position_id" id="position_id">
+            <label for="position_name">Position Name:</label>
+            <input type="search" name="position_name" id="position_name">
+            <input type="submit" value="Search">
+        </form>
+
+        <h1>Position List</h1>
+        <table id="positionTable" border="1" width="50%">
+            <thead>
+                <tr>
+                    <th>Position Id</th>
+                    <th>Position Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% positions.forEach(function(position) { %>
+                    <tr>
+                        <td><%= position.position_id %></td>
+                        <td><%= position.position_name %></td>
+                        <td>
+                            <a href="/tables/delete-position-info?position_id=<%= position.position_id %>"
+                               onclick="return confirm('Are you sure you want to delete this position?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function searching() {
+            const position_id = document.getElementById("position_id").value;
+            const position_name = document.getElementById("position_name").value;
+
+            const req = new XMLHttpRequest();
+            req.open('GET', `/tables/search-position?position_id=${encodeURIComponent(position_id)}&position_name=${encodeURIComponent(position_name)}`, true);
+            req.send();
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    const positions = JSON.parse(req.responseText); // Parse the JSON response
+                    updateTable(positions);
+                }
+            };
+            return false; // Prevent form submission
+        }
+
+        function updateTable(positions) {
+            const tbody = document.querySelector("#positionTable tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            if (positions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3">No positions found.</td></tr>`;
+                return;
+            }
+
+            positions.forEach(position => {
+                const row = `
+                    <tr>
+                        <td>${position.position_id}</td>
+                        <td>${position.position_name}</td>
+                        <td>
+                            <a href="/tables/delete-position-info?position_id=${position.position_id}"
+                               onclick="return confirm('Are you sure you want to delete this position?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+    </script>
+</body>
+</html>

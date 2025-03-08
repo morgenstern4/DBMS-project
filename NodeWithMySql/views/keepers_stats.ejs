@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Keeper Stats  List</title>
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Keeper Stats  List</h1>
+        <% if( keepers_stats.length > 0) { %>
+            <table class="all-player-info-table" , border="1">
+                <tr> 
+                    <th>Keepers stats Id</th>
+                     <th>Player id</th>
+                     <th>Goal Against</th>
+                     <th> Shoot on target against</th>
+                     <th>saves </th>
+                     <th>clean sheets</th>
+                     <th>penalty kicks attempted</th>
+                     <th>penalty kicks allowed</th>
+                     <th>penalty kicks saved</th>
+                     <td>Actions</td>
+                </tr>
+                <%  keepers_stats.forEach(function(player) { %>
+                    <tr>
+                        <td data-label="Keepers stats Id"><%= player.keeper_stats_id %></td>
+                        <td data-label=">Player id"><%= player.player_id %></td>
+                        <td data-label="Goal Against"><%= player.goals_against %></td>
+                        <td data-label="Shoot on target against"><%= player.shots_on_target_against %></td>
+                        <td data-label="saves"><%= player.saves %></td>
+                        <td data-label="clean sheets"><%= player.clean_sheets %></td>
+                        <td data-label="penalty kicks attempted"><%= player.penalty_kicks_attempted %></td>
+                        <td data-label="penalty kicks allowed"><%= player.penalty_kicks_allowed %></td>
+                        <td data-label="penalty kicks saved"><%= player.penalty_kicks_saved %></td>
+                        <td>
+                            <a href="/tables/delete-keeper-info?keeper_stats_id=<%= player.keeper_stats_id %>" 
+                               onclick="return confirm('Are you sure you want to delete this record?')">
+                                Delete
+                            </a>
+                        </td>              
+                       </tr>
+                <% }); %>
+            </table>
+        <% } else { %>
+            <h2>No players found.</h2>
+        <% } %>
+    </div>
+</body>
+</html>

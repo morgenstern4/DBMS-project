@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club List</title>
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Clubs</h1>
+        <form id="searchForm" onsubmit="return searching()">
+            <label for="club_id">Club ID:</label>
+            <input type="search" name="club_id" id="club_id">
+            <label for="club_name">Club Name:</label>
+            <input type="search" name="club_name" id="club_name">
+            <input type="submit" value="Search">
+        </form>
+
+        <h1>Club List</h1>
+        <table id="clubTable" border="1" style="width: 50% ;align ="center">
+            <thead>
+                <tr>
+                    <th>Club Id</th>
+                    <th>Club Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% clubs.forEach(function(club) { %>
+                    <tr>
+                        <td><%= club.club_id %></td>
+                        <td><%= club.club_name %></td>
+                        <td>
+                            <a href="/tables/delete-club-info?club_id=<%= club.club_id %>"
+                               onclick="return confirm('Are you sure you want to delete this club?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function searching() {
+            const club_id = document.getElementById("club_id").value;
+            const club_name = document.getElementById("club_name").value;
+
+            const req = new XMLHttpRequest();
+            req.open('GET', `/tables/search-club?club_id=${encodeURIComponent(club_id)}&club_name=${encodeURIComponent(club_name)}`, true);
+            req.send();
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    const clubs = JSON.parse(req.responseText); // Parse the JSON response
+                    updateTable(clubs);
+                }
+            };
+            return false; // Prevent form submission
+        }
+
+        function updateTable(clubs) {
+            const tbody = document.querySelector("#clubTable tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            if (clubs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3">No clubs found.</td></tr>`;
+                return;
+            }
+
+            clubs.forEach(club => {
+                const row = `
+                    <tr>
+                        <td>${club.club_id}</td>
+                        <td>${club.club_name}</td>
+                        <td>
+                            <a href="/tables/delete-club-info?club_id=${club.club_id}"
+                               onclick="return confirm('Are you sure you want to delete this club?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Squad List</title>
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Squads</h1>
+        <form id="searchForm" onsubmit="return searching()">
+            <label for="squad_id">Squad ID:</label>
+            <input type="search" name="squad_id"  id="squad_id">
+            <label for="squad_name">Squad Name:</label>
+            <input type="search" name="squad_name"   id="squad_name">
+            <input type="submit" value="Search">
+        </form>
+
+        <h1>Squad List</h1>
+        <table id="squadTable" border = "1">
+            <thead>
+                <tr>
+                    <th>Squad Id</th>
+                    <th>Squad Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% squads.forEach(function(squad) { %>
+                    <tr>
+                        <td><%= squad.squad_id %></td>
+                        <td><%= squad.squad_name %></td>
+                        <td>
+                            <a href="/tables/delete-squad-info?squad_id=<%= squad.squad_id %>"
+                               onclick="return confirm('Are you sure you want to delete this squad?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function searching() {
+            const squad_id = document.getElementById("squad_id").value;
+            const squad_name = document.getElementById("squad_name").value;
+
+            const req = new XMLHttpRequest();
+            req.open('GET', `/tables/search-squad?squad_id=${encodeURIComponent(squad_id)}&squad_name=${encodeURIComponent(squad_name)}`, true);
+            req.send();
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    const squads = JSON.parse(req.responseText); // Parse the JSON response
+                    updateTable(squads);
+                }
+            };
+            return false; // Prevent form submission
+        }
+
+        function updateTable(squads) {
+            const tbody = document.querySelector("#squadTable tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            if (squads.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3">No squads found.</td></tr>`;
+                return;
+            }
+
+            squads.forEach(squad => {
+                const row = `
+                    <tr>
+                        <td>${squad.squad_id}</td>
+                        <td>${squad.squad_name}</td>
+                        <td>
+                            <a href="/tables/delete-squad-info?squad_id=${squad.squad_id}"
+                               onclick="return confirm('Are you sure you want to delete this squad?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+    </script>
+</body>
+</html>

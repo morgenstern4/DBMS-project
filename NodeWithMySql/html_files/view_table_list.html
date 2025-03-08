@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table List - 2022 World Cup</title>
+    <link rel="stylesheet" href="/css/table.css"> <!-- Link to table.css -->
+    <style>
+        /* Additional inline styles for a spectacular design */
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffd700;
+        }
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .links a {
+            display: block;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .links a:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2022 World Cup Database</h1>
+        <div class="links">
+            <!-- Existing table links -->
+            <a href="/view_tables/squads">Squads</a>
+            <a href="/view_tables/clubs">Clubs</a>
+            <a href="/view_tables/positions">Positions</a>
+            <a href="/view_tables/all_players_info">All Players Info</a>
+            <a href="/view_tables/players_stats">Players Stats</a>
+            <a href="/view_tables/keepers_stats">Keepers Stats</a>
+            <a href="/view_tables/stadiums">Stadiums</a>
+            <a href="/view_tables/matches">Matches</a>
+
+            <!-- New query links -->
+            <a href="/view_tables/top_players">Top 5 Players by Goals</a>
+            <a href="/view_tables/squads_with_high_goals">Squads with Total Goals Above 10</a>
+            <a href="/view_tables/keepers">All Keepers</a>
+            <a href="/view_tables/squads_and_players">Squads and Players</a>
+            <a href="/view_tables/squad_goals">Total Goals by Squad</a>
+            <a href="/view_tables/clean_sheet_percentage">Clean Sheet Percentage</a>
+            <a href="/view_tables/top_scorers">Top Scorers</a>
+            <a href="/view_tables/players_with_penalties">Players with Penalties</a>
+            <a href="/view_tables/above_average_goals">Players with Above-Average Goals</a>
+            <a href="/view_tables/match-finder">Match Finding</a>
+            <a href="/view_tables/booking">Booking</a>
+            <!-- <a href="/view_tables/match-results">Match Results</a> -->
+        </div>
+        <div class="footer">
+            <p>Developed with ❤️ by <a href="#" target="_blank">Your Name</a></p>
+        </div>
+    </div>
+</body>
+</html>

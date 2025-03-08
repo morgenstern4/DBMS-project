@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Stadium List</title>
+    <link rel="stylesheet" href="/css/table.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Stadium</h1>
+        <form id="searchForm" onsubmit="return searching()">
+            <label for="stadium_id">Stadium ID:</label>
+            <input type="search" name="stadium_id" id="stadium_id">
+            <label for="stadium_name">Stadium Name:</label>
+            <input type="search" name="stadium_name" id="stadium_name">
+            <label for="capacity">Capacity:</label>
+            <input type="search" name="capacity" id="capacity">
+            <label for="total_match_played">Total Match Played:</label>
+            <input type="search" name="total_match_played" id="total_match_played">
+            <input type="submit" value="Search">
+        </form>
+
+        <h1>Stadium List</h1>
+        <table id="stadiumTable" class="stadium-table border" border="1" align="center">
+            <thead>
+                <tr>
+                    <th>Stadium Id</th>
+                    <th>Stadium Name</th>
+                    <th>Capacity</th>
+                    <th>Total Match Played</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% stadiums.forEach(function(stadium) { %>
+                    <tr>
+                        <td data-label="ID"><%= stadium.stadium_id %></td>
+                        <td data-label="Name"><%= stadium.stadium_name %></td>
+                        <td data-label="Capacity"><%= stadium.capacity.toLocaleString() %></td>
+                        <td data-label="Matches"><%= stadium.total_match_played %></td>
+                        <td>
+                            <a href="/tables/delete-stadium-info?stadium_id=<%= stadium.stadium_id %>"
+                               onclick="return confirm('Are you sure you want to delete this stadium?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function searching() {
+            const stadium_id = document.getElementById("stadium_id").value;
+            const stadium_name = document.getElementById("stadium_name").value;
+            const capacity = document.getElementById("capacity").value;
+            const total_match_played = document.getElementById("total_match_played").value;
+
+            const req = new XMLHttpRequest();
+            req.open('GET', `/tables/search-stadium?stadium_id=${encodeURIComponent(stadium_id)}&stadium_name=${encodeURIComponent(stadium_name)}&capacity=${encodeURIComponent(capacity)}&total_match_played=${encodeURIComponent(total_match_played)}`, true);
+            req.send();
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    const stadiums = JSON.parse(req.responseText); // Parse the JSON response
+                    updateTable(stadiums);
+                }
+            };
+            return false; // Prevent form submission
+        }
+
+        function updateTable(stadiums) {
+            const tbody = document.querySelector("#stadiumTable tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            if (stadiums.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5">No stadiums found.</td></tr>`;
+                return;
+            }
+
+            stadiums.forEach(stadium => {
+                const row = `
+                    <tr>
+                        <td data-label="ID">${stadium.stadium_id}</td>
+                        <td data-label="Name">${stadium.stadium_name}</td>
+                        <td data-label="Capacity">${stadium.capacity.toLocaleString()}</td>
+                        <td data-label="Matches">${stadium.total_match_played}</td>
+                        <td>
+                            <a href="/tables/delete-stadium-info?stadium_id=${stadium.stadium_id}"
+                               onclick="return confirm('Are you sure you want to delete this stadium?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+    </script>
+</body>
+</html>

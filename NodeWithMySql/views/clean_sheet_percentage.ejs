@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Sheet Percentage</title>
+    <!-- Bootstrap 5 CSS (Local) -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        td {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+            display: inline-block;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clean Sheet Percentage</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Goalkeeper Name</th>
+                    <th>Matches Played</th>
+                    <th>Clean Sheets</th>
+                    <th>Clean Sheet Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% clean_sheets.forEach(player => { %>
+                    <tr>
+                        <td><%= player.goalkeeper_name %></td>
+                        <td><%= player.matches_played %></td>
+                        <td><%= player.clean_sheets %></td>
+                        <td><%= player.clean_sheet_percentage.toFixed(2) %>%</td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <br>
+        <a href="/view_tables" class="btn-secondary">Back to Table List</a>
+        <div class="footer">
+            <p>Developed with ❤️ by <a href="#" target="_blank">Your Name</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS (Local) -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

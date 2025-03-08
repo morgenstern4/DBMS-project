@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Results</title>
+    <!-- Bootstrap 5 CSS (Local) -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .match-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .flag {
+            width: 100px;
+            height: auto;
+            border: 2px solid #fff;
+            border-radius: 8px;
+        }
+
+        .squad-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .match-date {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 20px;
+        }
+
+        .no-matches {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Match Results</h1>
+        <% if (matches.length === 0) { %>
+            <p class="no-matches">No matches occurred between the selected squads.</p>
+        <% } else { %>
+            <% matches.forEach(match => { %>
+                <div class="match-container">
+                    <div>
+                        <img src="/images/flags/<%= match.squad_1_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_1_name %> Flag" class="flag">
+                        <div class="squad-name"><%= match.squad_1_name %></div>
+                    </div>
+                    <div class="score"><%= match.score_squad_1 %> - <%= match.score_squad_2 %></div>
+                    <div>
+                        <img src="/images/flags/<%= match.squad_2_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_2_name %> Flag" class="flag">
+                        <div class="squad-name"><%= match.squad_2_name %></div>
+                    </div>
+                </div>
+                <div class="match-date"><%= match.match_date %></div>
+            <% }) %>
+        <% } %>
+        <br>
+        <a href="/view_tables/match-finder" class="btn-secondary">Back to Match Finder</a>
+        <div class="footer">
+            <p>Developed with ❤️ by <a href="#" target="_blank">Your Name</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS (Local) -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
