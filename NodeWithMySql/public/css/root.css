@@ -1,4 +1,4 @@
- /* Spectacular Root Page Styling */
+   /* Spectacular Root Page Styling */
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
@@ -8,19 +8,19 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Align content at the top */
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    text-align: center;
 }
 
 h1 {
     font-size: 3.5em;
     font-weight: 600;
     line-height: 1.2;
-    text-align: center;
     color: #fff;
-    margin-bottom: 20px;
+    margin-top: 50px; /* Adjust margin to position at the top */
     text-transform: uppercase;
     letter-spacing: 3px;
     animation: glow 2s infinite alternate;
@@ -36,7 +36,10 @@ h1 {
 }
 
 .links {
-    text-align: center;
+    margin-top: 20px; /* Add spacing below the heading */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 20px; /* Add spacing between buttons */
     animation: fadeIn 1.5s ease-in-out;
 }
 
@@ -52,9 +55,10 @@ h1 {
 }
 
 .links a {
-    display: inline-block;
-    margin: 10px;
-    padding: 15px 30px;
+    display: block; /* Make buttons full-width */
+    width: 250px; /* Set a fixed width for consistency */
+    text-align: center;
+    padding: 15px;
     font-size: 1.2em;
     font-weight: 500;
     color: #fff;
