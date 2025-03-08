@@ -3,6 +3,7 @@ const path = require("path");
 const viewRoutes = require("../routes/view_routes");  
 const insertRoutes = require("../routes/insert_routes");
 const deleteRoutes = require("../routes/delete_routes");
+const analyticsRoutes = require("../routes/analytics");
 
 const con = require("./connection");
 
@@ -31,6 +32,7 @@ app.get("/insert_data_into_tables", (req, res) => {
 app.use("/", viewRoutes);
 app.use("/", insertRoutes);
 app.use("/",deleteRoutes);
+// app.use("/", analyticsRoutes);
 module.exports = app;
  
 app.get('/tables/search-squad', function (req, res) {
